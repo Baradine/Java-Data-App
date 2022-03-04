@@ -13,6 +13,8 @@ public class Window
     Box controlArea;
     Panel dataPan;
     Panel controlPan;
+    WindowButtons press;
+    TextField rowID;
     
     CSVData data;
     /**
@@ -21,6 +23,7 @@ public class Window
     public Window(int width, int height, CSVData d)
     {
         this.data = d;
+        this.press = new WindowButtons(this);
         
         frame = new JFrame(data.name);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,12 +32,23 @@ public class Window
         controlArea = new Box(BoxLayout.Y_AXIS);
         
         dataPan = new Panel();
-        int dRows = (int)Math.ceil((double)data.columns/6.0);
-        dataPan.setLayout(new GridLayout(dRows*2,6));
-        
+        int dRows = (int)Math.ceil((double)data.columns/4.0);
+        dataPan.setLayout(new GridLayout(dRows*2,4));
         InitDataPanel(data);
         
-        frame.add(dataPan);
+        controlPan = new Panel();
+        controlPan.setLayout(new GridLayout(1,2));
+        Button getItem = new Button("Get Selection by Row");
+        getItem.addActionListener(press);
+        rowID = new TextField("",10);
+        controlPan.add(getItem);
+        controlPan.add(rowID);
+        
+        controlArea.add(controlPan);
+        dataArea.add(dataPan);
+        frame.add(dataArea);
+        frame.add(controlArea);
+        setupMenu();
         frame.pack();
         frame.setVisible(true);
         
@@ -49,5 +63,17 @@ public class Window
             dataPan.add(lbl);
             dataPan.add(txt);
         }
+    }
+    
+    private void setupMenu()
+    {
+        JMenuBar mb = new JMenuBar();
+        JMenu file = new JMenu("File");
+        JMenuItem loadFileMenu = new JMenuItem("Load CSV");
+        loadFileMenu.addActionListener(press);
+        
+        file.add(loadFileMenu);
+        mb.add(file);
+        frame.setJMenuBar(mb);
     }
 }

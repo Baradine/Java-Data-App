@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Main here.
+ * Runs the app
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Davis Teigeler
+ * @version v1.0
  */
 public class Main
 {
