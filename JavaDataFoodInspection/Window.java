@@ -20,7 +20,7 @@ public class Window
     /**
      * Constructor for objects of class Window
      */
-    public Window(int width, int height, CSVData d)
+    public Window(CSVData d)
     {
         this.data = d;
         this.press = new WindowButtons(this);
@@ -32,8 +32,8 @@ public class Window
         controlArea = new Box(BoxLayout.Y_AXIS);
         
         dataPan = new Panel();
-        int dRows = (int)Math.ceil((double)data.columns/4.0);
-        dataPan.setLayout(new GridLayout(dRows*2,4));
+        int dRows = (int)Math.ceil((double)data.columns/2.0);
+        dataPan.setLayout(new GridLayout(dRows,4));
         InitDataPanel(data);
         
         controlPan = new Panel();
@@ -46,6 +46,7 @@ public class Window
         
         controlArea.add(controlPan);
         dataArea.add(dataPan);
+        dataArea.setBackground(Color.DARK_GRAY);
         frame.add(dataArea);
         frame.add(controlArea);
         setupMenu();
@@ -60,6 +61,9 @@ public class Window
         {
             TextField txt = new TextField("",20);
             Label lbl = new Label(d.header[i]);
+            txt.setForeground(new Color(0.95f,0.92f,0.95f));
+            txt.setBackground(new Color(0.2f,0.2f,0.2f));
+            lbl.setForeground(Color.white);
             dataPan.add(lbl);
             dataPan.add(txt);
         }

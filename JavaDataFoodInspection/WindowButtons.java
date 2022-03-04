@@ -1,5 +1,7 @@
 import java.awt.event.*;
 import java.awt.*;
+import javax.swing.*;
+import javax.swing.filechooser.*;
 /**
  * Gets and does actions for our Window Buttons
  *
@@ -31,6 +33,23 @@ public class WindowButtons implements ActionListener
             catch(Exception x)
             {
                 
+            }
+        }
+        if (e.getActionCommand() == "Load CSV")
+        {
+            JFileChooser file = new JFileChooser(System.getProperty("user.dir"));
+            
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "CSV Files", "csv");
+            file.setFileFilter(filter);
+            int returnVal = file.showOpenDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION) 
+            { 
+                String filename = file.getSelectedFile().getAbsolutePath();
+                CSVLoader csvl = new CSVLoader();
+                CSVData d = csvl.Load(filename);
+                Window w = new Window(d);
+                win.frame.dispose();
             }
         }
     }

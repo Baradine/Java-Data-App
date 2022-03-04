@@ -11,7 +11,7 @@ public class Main
     {
         CSVLoader load = new CSVLoader();
         CSVData data = load.Load("Food_Inspection.csv");
-        Window w = new Window(0,0,data);
+        Window w = new Window(data);
     }
     
 }

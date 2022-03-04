@@ -21,6 +21,15 @@ public class CSVLoader
         }
         return null;
     }
+    // public CSVData Load (File file)
+    // {
+        // if (file.exists())
+        // {
+            // int rows = CountRows(file.getAbsolutePath());
+            // return LoadData(file.getAbsolutePath(), rows);
+        // }
+        // return null;
+    // }
     
     public int CountRows (String filename)
     {
